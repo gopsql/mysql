@@ -2,6 +2,11 @@
 
 Support MySQL or MariaDB for [github.com/gopsql/psql](https://github.com/gopsql/psql).
 
+You can make MySQL SELECT, INSERT, UPDATE, DELETE statements with this package.
+
+NOTE: Please don't use those features that are only available in PostgreSQL but
+not MySQL at the moment.
+
 ## Example
 
 ```go
