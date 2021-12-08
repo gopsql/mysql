@@ -14,6 +14,7 @@ package main
 
 import (
 	"database/sql/driver"
+	"encoding/json"
 	"fmt"
 	"strconv"
 	"time"
@@ -82,5 +83,18 @@ func (t *timestamp) Scan(value interface{}) error {
 
 func (t timestamp) Value() (driver.Value, error) {
 	return strconv.FormatInt(time.Time(t).Unix(), 10), nil
+}
+
+func (t timestamp) MarshalJSON() ([]byte, error) {
+	return json.Marshal(time.Time(t))
+}
+
+func (t *timestamp) UnmarshalJSON(b []byte) error {
+	var m time.Time
+	if err := json.Unmarshal(b, &m); err != nil {
+		return err
+	}
+	*t = timestamp(m)
+	return nil
 }
 ```
