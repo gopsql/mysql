@@ -13,7 +13,7 @@ import (
 
 type (
 	mysqlDB struct {
-		standard.DB
+		*standard.DB
 	}
 )
 
@@ -52,5 +52,5 @@ func Open(conn string) (*mysqlDB, error) {
 	if err := c.Ping(); err != nil {
 		return nil, err
 	}
-	return &mysqlDB{standard.DB{c}}, nil
+	return &mysqlDB{standard.NewDB("mysql", c)}, nil
 }
